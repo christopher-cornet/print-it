@@ -20,11 +20,9 @@ const slides = [
 // Variables and elements
 const ARROW_LEFT = document.querySelector(".arrow_left");
 const ARROW_RIGHT = document.querySelector(".arrow_right");
-
 const DOTS = document.querySelector(".dots");
 
 let index = 0; // Index of the selected bullet point
-
 
 // Create the bullet points
 let addBulletPoints = () => {
@@ -85,25 +83,28 @@ let changeSlide = (direction) => {
 			index--;
 		}
 	}
-	
-	console.log(index); // 0, 1, 2, 3 en boucle et inversement
 }
 
 // Change the background image
 let changeImage = () => {
 	const IMAGE = document.querySelector(".banner-img");
+	const TEXT = document.querySelector("#banner p");
 	
 	if (index == 0) {
 		IMAGE.src = `./assets/images/slideshow/${slides[0].image}`;
+		TEXT.innerHTML = `${slides[0].tagLine}`;
 	}
 	else if (index == 1) {
 		IMAGE.src = `./assets/images/slideshow/${slides[1].image}`;
+		TEXT.innerHTML = `${slides[1].tagLine}`;
 	}
 	else if (index == 2) {
 		IMAGE.src = `./assets/images/slideshow/${slides[2].image}`;
+		TEXT.innerHTML = `${slides[2].tagLine}`;
 	}
 	else if (index == 3) {
 		IMAGE.src = `./assets/images/slideshow/${slides[3].image}`;
+		TEXT.innerHTML = `${slides[3].tagLine}`;
 	}
 }
 
