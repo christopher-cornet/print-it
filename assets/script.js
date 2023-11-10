@@ -28,7 +28,7 @@ let index = 0; // Index of the selected bullet point
 let addBulletPoints = () => {
 	for (element in slides) {
 		const BULLETPOINT = document.createElement("div");
-		BULLETPOINT.classList.add("dot", `dot${element}`);
+		BULLETPOINT.classList.add("dot");
 		DOTS.appendChild(BULLETPOINT);
 	}
 	const BULLETPOINT = document.querySelectorAll(".dot");
