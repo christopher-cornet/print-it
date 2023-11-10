@@ -89,18 +89,36 @@ let changeSlide = (direction) => {
 	console.log(index); // 0, 1, 2, 3 en boucle et inversement
 }
 
+// Change the background image
+let changeImage = () => {
+	const IMAGE = document.querySelector(".banner-img");
+	
+	if (index == 0) {
+		IMAGE.src = `./assets/images/slideshow/${slides[0].image}`;
+	}
+	else if (index == 1) {
+		IMAGE.src = `./assets/images/slideshow/${slides[1].image}`;
+	}
+	else if (index == 2) {
+		IMAGE.src = `./assets/images/slideshow/${slides[2].image}`;
+	}
+	else if (index == 3) {
+		IMAGE.src = `./assets/images/slideshow/${slides[3].image}`;
+	}
+}
+
 addBulletPoints();
 
 // Events
 
 // Left arrow
 ARROW_LEFT.addEventListener("click", () => {
-	console.log("left");
 	changeSlide("left");
+	changeImage();
 });
 
 // Right arrow
 ARROW_RIGHT.addEventListener("click", () => {
-	console.log("right");
 	changeSlide("right");
+	changeImage();
 });
