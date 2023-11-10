@@ -18,57 +18,75 @@ const slides = [
 ]
 
 // Variables and elements
-const arrow_left = document.querySelector(".arrow_left");
-const arrow_right = document.querySelector(".arrow_right");
+const ARROW_LEFT = document.querySelector(".arrow_left");
+const ARROW_RIGHT = document.querySelector(".arrow_right");
 
-let dots = document.querySelector(".dots");
+const DOTS = document.querySelector(".dots");
 
-let index = 0; // Index in slides
-
-
-// queryselectorall pour avoir ts les bullet points
+let index = 0; // Index of the selected bullet point
 
 
 // Create the bullet points
 let addBulletPoints = () => {
 	for (element in slides) {
-		let bulletPoint = document.createElement("div");
-		bulletPoint.classList.add("dot", `dot${element}`);
-		dots.appendChild(bulletPoint);
+		const BULLETPOINT = document.createElement("div");
+		BULLETPOINT.classList.add("dot", `dot${element}`);
+		DOTS.appendChild(BULLETPOINT);
 	}
-	let bulletPoint1 = document.querySelector(".dot0");
-	bulletPoint1.classList.add("dot_selected");
+	const BULLETPOINT = document.querySelectorAll(".dot");
+	BULLETPOINT[0].classList.add("dot_selected");
 }
 
 // Change the selected bullet point
-let changeSlide = () => {
-	let bulletPoint0 = document.querySelector(".dot0");
-	let bulletPoint1 = document.querySelector(".dot1");
-	let bulletPoint2 = document.querySelector(".dot2");
-	let bulletPoint3 = document.querySelector(".dot3");
+let changeSlide = (direction) => {
+	const BULLETPOINT = document.querySelectorAll(".dot");
 
-	if (bulletPoint0.classList.contains("dot_selected")) {
-		bulletPoint0.classList.toggle("dot_selected");
-		bulletPoint1.classList.add("dot_selected");
-		index++;
+	if (direction == "right") {
+		if (index == 0) {
+			BULLETPOINT[0].classList.toggle("dot_selected");
+			BULLETPOINT[1].classList.add("dot_selected");
+			index++;
+		}
+		else if (index == 1) {
+			BULLETPOINT[1].classList.toggle("dot_selected");
+			BULLETPOINT[2].classList.add("dot_selected");
+			index++;
+		}
+		else if (index == 2) {
+			BULLETPOINT[2].classList.toggle("dot_selected");
+			BULLETPOINT[3].classList.add("dot_selected");
+			index++;
+		}
+		else if (index == 3) {
+			BULLETPOINT[3].classList.toggle("dot_selected");
+			BULLETPOINT[0].classList.add("dot_selected");
+			index = 0;
+		}
 	}
-	else if (bulletPoint1.classList.contains("dot_selected")) {
-		bulletPoint1.classList.toggle("dot_selected");
-		bulletPoint2.classList.add("dot_selected");
-		index++;
+	else {
+		if (index == 0) {
+			BULLETPOINT[0].classList.toggle("dot_selected");
+			BULLETPOINT[3].classList.add("dot_selected");
+			index = 3;
+		}
+		else if (index == 1) {
+			BULLETPOINT[1].classList.toggle("dot_selected");
+			BULLETPOINT[0].classList.add("dot_selected");
+			index--;
+		}
+		else if (index == 2) {
+			BULLETPOINT[2].classList.toggle("dot_selected");
+			BULLETPOINT[1].classList.add("dot_selected");
+			index--;
+		}
+		else if (index == 3) {
+			BULLETPOINT[3].classList.toggle("dot_selected");
+			BULLETPOINT[2].classList.add("dot_selected");
+			index--;
+		}
 	}
-	else if (bulletPoint2.classList.contains("dot_selected")) {
-		bulletPoint2.classList.toggle("dot_selected");
-		bulletPoint3.classList.add("dot_selected");
-		index++;
-	}
-	else if (bulletPoint3.classList.contains("dot_selected")) {
-		bulletPoint3.classList.toggle("dot_selected");
-		bulletPoint0.classList.add("dot_selected");
-		index = 0;
-	}
-
-	console.log(index); // 0, 1, 2, 3 en boucle
+	
+	console.log(index); // 0, 1, 2, 3 en boucle et inversement
 }
 
 addBulletPoints();
@@ -76,12 +94,13 @@ addBulletPoints();
 // Events
 
 // Left arrow
-arrow_left.addEventListener("click", () => {
+ARROW_LEFT.addEventListener("click", () => {
 	console.log("left");
+	changeSlide("left");
 });
 
 // Right arrow
-arrow_right.addEventListener("click", () => {
+ARROW_RIGHT.addEventListener("click", () => {
 	console.log("right");
-	changeSlide();
+	changeSlide("right");
 });
