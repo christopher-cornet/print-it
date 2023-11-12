@@ -41,7 +41,7 @@ let changeSlide = (direction) => {
 
 	if (direction == "right") {
 		if (index == slides.length - 1) {
-			BULLETPOINT[3].classList.toggle("dot_selected");
+			BULLETPOINT[`${slides.length - 1}`].classList.toggle("dot_selected");
 			BULLETPOINT[0].classList.add("dot_selected");
 			index = 0;
 		}
@@ -54,8 +54,8 @@ let changeSlide = (direction) => {
 	else {
 		if (index == 0) {
 			BULLETPOINT[0].classList.toggle("dot_selected");
-			BULLETPOINT[3].classList.add("dot_selected");
-			index = 3;
+			BULLETPOINT[`${slides.length - 1}`].classList.add("dot_selected");
+			index = slides.length - 1;
 		}
 		else {
 			BULLETPOINT[`${index}`].classList.toggle("dot_selected");
