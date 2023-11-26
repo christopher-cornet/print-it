@@ -28,7 +28,7 @@ let index = 0; // Index of the selected bullet point
 let addBulletPoints = () => {
 	for (element in slides) {
 		const BULLETPOINT = document.createElement("div");
-		BULLETPOINT.classList.add("dot", `dot${element}`);
+		BULLETPOINT.classList.add("dot");
 		DOTS.appendChild(BULLETPOINT);
 	}
 	const BULLETPOINT = document.querySelectorAll(".dot");
@@ -40,46 +40,26 @@ let changeSlide = (direction) => {
 	const BULLETPOINT = document.querySelectorAll(".dot");
 
 	if (direction == "right") {
-		if (index == 0) {
-			BULLETPOINT[0].classList.toggle("dot_selected");
-			BULLETPOINT[1].classList.add("dot_selected");
-			index++;
-		}
-		else if (index == 1) {
-			BULLETPOINT[1].classList.toggle("dot_selected");
-			BULLETPOINT[2].classList.add("dot_selected");
-			index++;
-		}
-		else if (index == 2) {
-			BULLETPOINT[2].classList.toggle("dot_selected");
-			BULLETPOINT[3].classList.add("dot_selected");
-			index++;
-		}
-		else if (index == 3) {
-			BULLETPOINT[3].classList.toggle("dot_selected");
+		if (index == slides.length - 1) {
+			BULLETPOINT[`${slides.length - 1}`].classList.toggle("dot_selected");
 			BULLETPOINT[0].classList.add("dot_selected");
 			index = 0;
+		}
+		else {
+			BULLETPOINT[`${index}`].classList.toggle("dot_selected");
+			BULLETPOINT[`${index + 1}`].classList.toggle("dot_selected");
+			index++;
 		}
 	}
 	else {
 		if (index == 0) {
 			BULLETPOINT[0].classList.toggle("dot_selected");
-			BULLETPOINT[3].classList.add("dot_selected");
-			index = 3;
+			BULLETPOINT[`${slides.length - 1}`].classList.add("dot_selected");
+			index = slides.length - 1;
 		}
-		else if (index == 1) {
-			BULLETPOINT[1].classList.toggle("dot_selected");
-			BULLETPOINT[0].classList.add("dot_selected");
-			index--;
-		}
-		else if (index == 2) {
-			BULLETPOINT[2].classList.toggle("dot_selected");
-			BULLETPOINT[1].classList.add("dot_selected");
-			index--;
-		}
-		else if (index == 3) {
-			BULLETPOINT[3].classList.toggle("dot_selected");
-			BULLETPOINT[2].classList.add("dot_selected");
+		else {
+			BULLETPOINT[`${index}`].classList.toggle("dot_selected");
+			BULLETPOINT[`${index - 1}`].classList.toggle("dot_selected");
 			index--;
 		}
 	}
@@ -90,22 +70,8 @@ let changeImage = () => {
 	const IMAGE = document.querySelector(".banner-img");
 	const TEXT = document.querySelector("#banner p");
 	
-	if (index == 0) {
-		IMAGE.src = `./assets/images/slideshow/${slides[0].image}`;
-		TEXT.innerHTML = `${slides[0].tagLine}`;
-	}
-	else if (index == 1) {
-		IMAGE.src = `./assets/images/slideshow/${slides[1].image}`;
-		TEXT.innerHTML = `${slides[1].tagLine}`;
-	}
-	else if (index == 2) {
-		IMAGE.src = `./assets/images/slideshow/${slides[2].image}`;
-		TEXT.innerHTML = `${slides[2].tagLine}`;
-	}
-	else if (index == 3) {
-		IMAGE.src = `./assets/images/slideshow/${slides[3].image}`;
-		TEXT.innerHTML = `${slides[3].tagLine}`;
-	}
+	IMAGE.src = `./assets/images/slideshow/${slides[index].image}`;
+	TEXT.innerHTML = `${slides[index].tagLine}`;
 }
 
 addBulletPoints();
